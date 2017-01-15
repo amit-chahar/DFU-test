@@ -137,19 +137,19 @@ function doDfu(datFile, binFile, peripheral) {
                                                 sendData(dfuPacketCharacteristicData, result)
                                                     .then(() => {
                                                         dfuControlpointCharacteristicData.write(new Buffer([CONTROL_OPCODES.CALCULATE_CHECKSUM]), true, function (err) {
-                                                            if(err){
+                                                            if (err) {
                                                                 console.log("Error: CALCULATE_CHECKSUM");
                                                                 return;
                                                             }
                                                             console.log(".dat File Sent");
                                                             dfuControlpointCharacteristicData.write(new Buffer([CONTROL_OPCODES.EXECUTE]), true, function (err) {
-                                                                if(err){
+                                                                if (err) {
                                                                     console.log("Error: EXECUTE");
                                                                     return;
                                                                 }
                                                                 console.log("Execute Cmd in Notification");
                                                                 dfuControlpointCharacteristicData.write(new Buffer([CONTROL_OPCODES.SELECT, CONTROL_PARAMETERS.DATA_OBJECT]), true, function (err) {
-                                                                    if(err){
+                                                                    if (err) {
                                                                         console.log("Error: SELECT");
                                                                         return;
                                                                     }
@@ -160,7 +160,7 @@ function doDfu(datFile, binFile, peripheral) {
                                                                             imageBuf = result;
                                                                             console.log(imageBuf.length);
                                                                             dfuControlpointCharacteristicData.write(new Buffer([CONTROL_OPCODES.CREATE, CONTROL_PARAMETERS.DATA_OBJECT, 0x0, 0x10, 0x0, 0x0]), true, function (err) {
-                                                                                if(err){
+                                                                                if (err) {
                                                                                     console.log("Error: sending bin file");
                                                                                     return;
                                                                                 }
@@ -182,6 +182,7 @@ function doDfu(datFile, binFile, peripheral) {
                                                                                                 console.log("Done Execution");
                                                                                             }
                                                                                         }
+
                                                                                         checkFileStatus();
                                                                                     });
                                                                             });
