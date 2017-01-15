@@ -1,0 +1,13 @@
+{
+  "name": "dfu-test",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "adm-zip": "^0.4.7",
+    "crc": "^3.4.4",
+    "noble": "^1.7.0"
+  }
+}
