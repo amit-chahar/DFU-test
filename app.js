@@ -1,9 +1,14 @@
 var noble = require('noble'),
     fs = require('fs'),
-    rl = require("readline"),
+    readline = require("readline"),
     crc = require('crc'),
     fileUtils = require('./file_utils'),
     littleEndianUtils = require('./little_endian_utils');
+
+var rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout
+});
 
 var dfuTargService = '0000fe5900001000800000805f9b34fb';
 var dfuControlpointCharacteristicUuid = '8ec90001f3154f609fb8838830daea50';
@@ -61,7 +66,7 @@ function get_pps() {
                 count++;
                 if (count == peripheralsData.length) {
                     rl.question("Enter your choice: ", function (answer) {
-                        if (!NaN(answer)) {
+                        if (!isNaN(answer)) {
                             var pp = peripheralsData[parseInt(answer)];
                             unZipFile("test_firmware.zip", pp);
                         }
@@ -69,7 +74,7 @@ function get_pps() {
                 }
             }
         }
-    }, 10000);
+    }, 5000);
 }
 
 function unZipFile(fileName, peripheral) {
@@ -180,6 +185,8 @@ function doDfu(datFile, binFile, peripheral) {
                                                                                             else {
                                                                                                 console.log(".bin File Sent");
                                                                                                 console.log("Done Execution");
+												console.log("Firmware updated");
+												process.exit(0);
                                                                                             }
                                                                                         }
 
